@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Apollo Escape</title>
+    <meta name="description" content="Hello, WebVR! - A-Frame">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+    <script src="/main.bundle.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+</head>
+
+<body>
+    <a-scene shadow="type:pcfsoft" light="defaultLightsEnabled: false" stats>
+        <a-assets>
+        </a-assets>
+        
+        <a-triangle  vertex-a="0  0  0"
+                            vertex-c="0.5 1 0" vertex-c="1 0 0"></a-triangle>
+
+        <a-plane color="#DEDEDE" rotation="-90 0 0" width="50" height="50"></a-plane>
+      
+        <a-light light="type: ambient; color: #ffffff; intensity: 0.7;"></a-light>
+        <a-sky color="#333"></a-sky>
+    </a-scene>
+</body>
+
+</html>

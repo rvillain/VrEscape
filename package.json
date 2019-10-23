@@ -51,6 +51,10 @@
     "webpack-dev-server": "3.1.4"
   },
   "dependencies": {
-    "firebase-tools": "^7.6.1"
+    "aframe-area-light-component": "^1.0.1",
+    "aframe-physics-system": "^4.0.1",
+    "aframe-teleport-controls": "^0.3.1",
+    "firebase-tools": "^7.6.1",
+    "super-hands": "^3.0.0"
   }
 }

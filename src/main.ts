@@ -3,10 +3,11 @@ import 'aframe';
 import 'aframe-template-component';
 import 'aframe-geometry-merger-component';
 import 'aframe-event-set-component';
-
+import 'aframe-teleport-controls';
+import 'aframe-physics-system';
+import 'aframe-area-light-component';
+import 'super-hands';
 import { GameManager } from './game-manager';
-// import { StartButtonRegister } from './components/start-button';
-
 import './components/buff-color';
 import './components/bs-cube';
 import './components/start-button';
