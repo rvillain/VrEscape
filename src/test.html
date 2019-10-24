@@ -13,13 +13,19 @@
     <a-scene shadow="type:pcfsoft" light="defaultLightsEnabled: false" stats>
         <a-assets>
         </a-assets>
-        
-        <a-triangle  vertex-a="0  0  0"
-                            vertex-c="0.5 1 0" vertex-c="1 0 0"></a-triangle>
+    <a-entity position="0 0.5 -2">
+        <a-cylinder color="#000000" geometry="radius: 0.02; height: 0.5" position="0.287 0.183 0" rotation="0 0 15"></a-cylinder>
+        <a-cylinder color="#000000" geometry="radius: 0.02; height: 0.5" position="0 0.183 0.287" rotation="0 -90 15"></a-cylinder>
+        <a-cylinder color="#000000" geometry="radius: 0.02; height: 0.5" position="0 0.183 -0.287" rotation="0 90 15"></a-cylinder>
+        <a-cylinder color="#000000" geometry="radius: 0.02; height: 0.5" position="-0.287 0.183 0" rotation="0 180 15"></a-cylinder>
+        <a-cylinder position="0 0.44 0" color="#775533" geometry="radius: 0.5; height: 0.02"></a-cylinder>
+    </a-entity>
+       
 
         <a-plane color="#DEDEDE" rotation="-90 0 0" width="50" height="50"></a-plane>
       
         <a-light light="type: ambient; color: #ffffff; intensity: 0.7;"></a-light>
+        <a-light light="type: point; color: #ffffff; intensity: 0.7;" position="0 10 0"></a-light>
         <a-sky color="#333"></a-sky>
     </a-scene>
 </body>
