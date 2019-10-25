@@ -11,6 +11,7 @@ import 'super-hands';
 import { GameManager } from './game-manager';
 import './components/buff-color';
 import './components/bs-cube';
+import './components/bs-saber';
 import './components/start-button';
 
 declare global {

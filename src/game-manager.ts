@@ -13,9 +13,15 @@ export class GameManager {
     public phases: Phase[];
     public currentPhase: Phase;
 
+    private timer: Timer;
+    public timerEl: any;
+
     public start(): void {
         this.currentPhase.start();
         this.moveLight();
+        this.timerEl = document.getElementById('timer');
+        this.timer = new Timer(60 * 10, this);
+        this.updateScoreBoard();
     }
 
     public phaseEnd() {
@@ -29,11 +35,44 @@ export class GameManager {
             this.moveLight();
             this.currentPhase.start();
         }
+        this.updateScoreBoard();
+    }
+
+    public end() {
+
     }
 
     public moveLight() {
-        var lightEl = document.getElementById('light');
+        let lightEl = document.getElementById('light');
         lightEl.setAttribute('animation', `property: position; to:${this.currentPhase.lightPosition}; loop: false; dur: 3000;`);
+    }
+
+    public updateScoreBoard() {
+
+        const index = this.phases.indexOf(this.currentPhase);
+        const stepsCount = this.phases.length;
+
+        const steps = document.getElementById('steps');
+        steps.setAttribute('value', 'Phases: ' + index + '/' + stepsCount);
+    }
+    public updateTimer(counter: number) {
+        this.timerEl.setAttribute('value', counter);
     }
 }
 
+class Timer {
+    constructor(public counter = 90, game: GameManager) {
+        game.updateTimer(counter);
+        let intervalId = setInterval(() => {
+
+            this.counter = this.counter - 1;
+
+            game.updateTimer(this.counter);
+
+            if (this.counter === 0) {
+                clearInterval(intervalId);
+                game.end();
+            }
+        }, 1000);
+    }
+}

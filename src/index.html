@@ -15,8 +15,6 @@
             <img id="volet" src="assets/volet.jpg">
             <img id="apollo" src="assets/apollo.png">
             <img id="papier-peint" src="assets/papier-peint.jpg">
-            <a-asset-item id="canap-obj" src="assets/models/canap/IKEA-Arild_2_Seat_Sofa-3D.obj"></a-asset-item>
-            <a-asset-item id="canap-mtl" src="assets/models/canap/IKEA-Arild_2_Seat_Sofa-3D.mtl"></a-asset-item>
 
             <a-asset-item id="vive-obj" src="assets/models/vive/vr_controller_vive.obj"></a-asset-item>
             <a-asset-item id="vive-mtl" src="assets/models/vive/vr_controller_vive.mtl"></a-asset-item>
@@ -567,14 +565,14 @@
 
             <a-plane static-body position="0 0 0" opacity="0" height="50" width="50" rotation="-90 0 0"> </a-plane>
 
-            <a-entity id="sabre-bleu" dynamic-body position="-9.6 0.6 -2.5" rotation="90 0 0" grabbable draggable dropppable>
+            <a-entity id="sabre-bleu" bs-saber dynamic-body position="-9.6 0.6 -2.5" rotation="90 0 0" grabbable="usePhysics: false;" draggable dropppable>
                 <a-cylinder color="#DEDEDE" geometry="radius: 0.015; height: 0.22"></a-cylinder>
-                <a-cylinder position="0 0.44 0" sphere-collider class="saber" opacity="0.5" color="#2233AA" geometry="radius: 0.015; height: 0.66">
+                <a-cylinder position="0 0.44 0" class="saber" opacity="0.5" color="#2233AA" geometry="radius: 0.015; height: 0.66">
                 </a-cylinder>
             </a-entity>
-            <a-entity dynamic-body id="sabre-rouge" position="-9.8 0.6 -2.5" rotation="90 0 0" grabbable draggable dropppable>
+            <a-entity id="sabre-rouge" bs-saber dynamic-body  position="-9.8 0.6 -2.5" rotation="90 0 0" grabbable="usePhysics: false;" draggable dropppable>
                 <a-cylinder color="#DEDEDE" geometry="radius: 0.015; height: 0.22"></a-cylinder>
-                <a-cylinder position="0 0.44 0" sphere-collider class="saber" opacity="0.5" color="#AA2233" geometry="radius: 0.015; height: 0.66">
+                <a-cylinder position="0 0.44 0" class="saber" opacity="0.5" color="#AA2233" geometry="radius: 0.015; height: 0.66">
                 </a-cylinder>
             </a-entity>
 
@@ -616,6 +614,11 @@
 
             </a-text>
         </a-box>
+        <a-entity id="scoreboard" position="-7.91022 0.8 -1.28953" rotation="0 180 0">
+            <a-text id="timer" value="" position="0 0.2 0" text=""></a-text>
+            
+            <a-text id="steps" scale="0.5 0.5 0.5" value="" position="0 -0.2 0" text=""></a-text>
+        </a-entity>
 
         <a-sky color="#cef9ff"></a-sky>
         <a-entity id="lights">
