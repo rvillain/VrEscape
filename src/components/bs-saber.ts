@@ -16,8 +16,6 @@ declare var $: any;
       var data = this.data;
       var el = this.el;  // <a-box>
 
-      el.setAttribute('physics-collider', 'objects: bs-cube');
-
       el.addEventListener('grabbed', () => {
         // Suppression du cube à la fin de l'animation
         console.log('grabbed');

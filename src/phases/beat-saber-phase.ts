@@ -1,6 +1,7 @@
 import { GameManager } from './../game-manager';
 import { Phase } from './phase';
 
+declare var $: any;
 
 // `collide` event emitted by a component such as some collider or physics component.
 // document.querySelector('a-entity').addEventListener('collide', function (evt) {
@@ -37,11 +38,12 @@ export class BeatSaberPhase extends Phase {
     }
     public end(): void {
         this.game.phaseEnd();
+        $('#sabre-bleu').remove();
+        $('#sabre-rouge').remove();
     }
 
     public hit(): void {
         this.hitCount++;
-        console.log(this.hitCount, this.cubes.length);
         if (this.hitCount === this.cubes.length) {
             this.end();
         }
