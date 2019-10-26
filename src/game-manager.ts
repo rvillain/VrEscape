@@ -1,26 +1,35 @@
 import { BeatSaberPhase } from './phases/beat-saber-phase';
 import { Phase } from './phases/phase';
 import { BizPhase } from './phases/biz-phase';
+import { FindSaberPhase } from './phases/find-saber-phase';
 
 export class GameManager {
 
     constructor() {
         this.phases = [];
+        this.phases.push(new FindSaberPhase(this));
         this.phases.push(new BeatSaberPhase(this));
         this.phases.push(new BizPhase(this));
         this.currentPhase = this.phases[0];
+        this.currentTime = 600;
+
+        setTimeout(() => {
+            this.timerEl = document.getElementById('timer');
+            this.updateTimer();
+        }, 1000);
+
     }
     public phases: Phase[];
     public currentPhase: Phase;
 
-    private timer: Timer;
+    public timer: Timer;
     public timerEl: any;
+    public currentTime: number;
 
     public start(): void {
         this.currentPhase.start();
         this.moveLight();
-        this.timerEl = document.getElementById('timer');
-        this.timer = new Timer(60 * 10, this);
+        this.timer = new Timer(this);
         this.updateScoreBoard();
     }
 
@@ -55,23 +64,26 @@ export class GameManager {
         const steps = document.getElementById('steps');
         steps.setAttribute('value', 'Phases: ' + index + '/' + stepsCount);
     }
-    public updateTimer(counter: number) {
-        this.timerEl.setAttribute('value', counter);
+    public updateTimer() {
+        var minutes = Math.floor(this.currentTime / 60);
+        var seconds: any = this.currentTime - minutes * 60;
+        seconds = seconds < 10 ? ('0' + seconds) : seconds;
+        this.timerEl.setAttribute('value', minutes + ':' + seconds);
     }
 }
 
 class Timer {
-    constructor(public counter = 90, game: GameManager) {
-        game.updateTimer(counter);
+    constructor(private game: GameManager) {
+        game.updateTimer();
         let intervalId = setInterval(() => {
 
-            this.counter = this.counter - 1;
+            this.game.currentTime = this.game.currentTime - 1;
 
-            game.updateTimer(this.counter);
+            this.game.updateTimer();
 
-            if (this.counter === 0) {
+            if (this.game.currentTime === 0) {
                 clearInterval(intervalId);
-                game.end();
+                this.game.end();
             }
         }, 1000);
     }

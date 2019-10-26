@@ -1,13 +1,6 @@
 import { GameManager } from './../game-manager';
 import { Phase } from './phase';
 
-declare var $: any;
-
-// `collide` event emitted by a component such as some collider or physics component.
-// document.querySelector('a-entity').addEventListener('collide', function (evt) {
-//     console.log('This A-Frame entity collided with another entity!');
-//   });
-
 export class BeatSaberPhase extends Phase {
     constructor(game: GameManager) {
         super(game);
@@ -37,9 +30,13 @@ export class BeatSaberPhase extends Phase {
         }, 12000);
     }
     public end(): void {
+        var elem = document.querySelector('#sabre-bleu');
+        elem.parentNode.removeChild(elem);
+
+        elem = document.querySelector('#sabre-rouge');
+        elem.parentNode.removeChild(elem);
+
         this.game.phaseEnd();
-        $('#sabre-bleu').remove();
-        $('#sabre-rouge').remove();
     }
 
     public hit(): void {
@@ -59,7 +56,7 @@ export class BeatSaberPhase extends Phase {
             cubeEl.setAttribute('color', cube.color);
             cubeEl.setAttribute('position', `${xPos} ${yPos} ${zPos}`);
             cubeEl.setAttribute('opacity', `0.8`);
-            cubeEl.setAttribute('bs-cube', '');
+            cubeEl.setAttribute('bs-cube', 'color: ' + (cube.color === 'blue' ? 'bleu' : 'rouge') + ';');
             cubeEl.setAttribute('geometry', `width: 0.2; height: 0.2; depth: 0.2;`);
             cubeEl.setAttribute('animation', `property: position; to:${xPos} ${yPos} ${zPos - 5}; loop: false; dur: 10000; delay: ${cube.delay}`);
             sceneEl.appendChild(cubeEl);

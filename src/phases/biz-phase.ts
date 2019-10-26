@@ -8,10 +8,16 @@ export class BizPhase extends Phase {
     }
 
     public start(): void {
-        throw new Error('Method not implemented.');
+        var sceneEl = document.querySelector('a-scene');
+
+        let linkHtml = '<a-entity link="href: moon.html; title: Aller sur la lune; image: #moon"></a-entity>';
+
+        var entity = document.createElement('a-entity');
+        entity.setAttribute('position', '-6 0 -10');
+        entity.innerHTML = linkHtml;
+        sceneEl.appendChild(entity);
     }
     public end(): void {
-        throw new Error('Method not implemented.');
     }
 
 }

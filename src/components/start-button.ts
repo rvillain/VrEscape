@@ -4,17 +4,17 @@ AFRAME.registerComponent('start-button', {
 
   init: function () {
     var el = this.el;
-    el.addEventListener('click', function () {
-      // var game = GameManager.CurrentGame;
-      console.log(window.game);
+
+    el.setAttribute('aabb-collider', 'objects: .hand');
+
+    el.addEventListener('click', function (e: any) {
       window.game.start();
       el.parentNode.removeChild(el);
     });
-    el.addEventListener('hit', (e: any) => {
-      if (e.detail != null && e.detail.el != null && e.detail.el.classList.contains('saber')) {
+    el.addEventListener('hitstart', (e: any) => {
+        console.log('hitstart', e);
         window.game.start();
         el.parentNode.removeChild(el);
-      }
     });
   }
 });

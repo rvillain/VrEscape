@@ -9,14 +9,13 @@ declare var game: GameManager;
 
   AFRAME.registerComponent('bs-cube', {
     schema: {
+      color: { type: 'string' }
     },
 
     init: function () {
       var data = this.data;
       var el = this.el;  // <a-box>
-      var defaultColor = el.getAttribute('material').color;
-
-      el.setAttribute('sphere-collider', 'objects: .saber');
+      el.setAttribute('aabb-collider', 'objects: #sabre-' + data.color);
 
       el.addEventListener('animationcomplete', () => {
         // Suppression du cube à la fin de l'animation
@@ -25,16 +24,12 @@ declare var game: GameManager;
       el.addEventListener('click', () => {
         this.cubeHit();
       });
-      el.addEventListener('hit', (e: any) => {
-        if (e.detail != null && e.detail.el != null && e.detail.el.classList.contains('saber')) {
+      el.addEventListener('hitstart', (e: any) => {
           this.cubeHit();
-        }
-      });
-      el.addEventListener('hitend', (e: any) => {
       });
     },
 
-    cubeHit: function() {
+    cubeHit: function () {
       var el = this.el;
       el.parentNode.removeChild(el);
       var bsPhase = game.phases.filter(p => p instanceof BeatSaberPhase)[0] as BeatSaberPhase;
