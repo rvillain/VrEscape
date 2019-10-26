@@ -63,6 +63,11 @@ module.exports = {
             {
                 from: 'index.html',
                 to: 'index.html'
+            },
+            
+            {
+                from: 'moon.html',
+                to: 'moon.html'
             }
         ])
     ],
