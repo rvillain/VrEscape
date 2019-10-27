@@ -1,5 +1,6 @@
 import { GameManager } from './../game-manager';
 import { Phase } from './phase';
+import { echaillonTrack, BsNote } from '../models/bsTrack';
 
 export class BeatSaberPhase extends Phase {
     constructor(game: GameManager) {
@@ -9,27 +10,36 @@ export class BeatSaberPhase extends Phase {
         this.scoreboardRotation = '0 180.000 0';
     }
 
-    public leftInitPosition = [-8.2, 1.5, 0];
-    public rightInitPosition = [-8.8, 1.5, 0];
+    public cubesPosition = [-8.2, 1.5, 0];
+
+    // Durée de la chanson en secondes
+    public duration = 15;
+    public songStartOffset = 10;
 
     public hitCount = 0;
 
-    public cubes = [
-        { color: 'blue', isRight: true, isUp: true, delay: 0 },
-        { color: 'red', isRight: false, isUp: true, delay: 200 },
-        { color: 'blue', isRight: true, isUp: false, delay: 700 },
-        { color: 'red', isRight: false, isUp: true, delay: 900 }
-    ];
+    public track = echaillonTrack;
+    public soundEl: any;
+
+
+    public notes: BsNote[];
 
     public start(): void {
+        this.sceneEl = document.querySelector('a-scene');
         this.addCubes();
+        this.addSound();
+        this.soundEl.components.sound.playSound();
         this.hitCount = 0;
         setTimeout(() => {
+            this.soundEl.components.sound.stopSound();
             // en cas d'echec on relance les cubes
-            if (this.hitCount !== this.cubes.length) {
+            if (this.hitCount !== this.notes.length) {
+                setTimeout(() => {
+                    this.start();
+                }, 2000);
                 this.start();
             }
-        }, 12000);
+        }, this.duration * 1000);
     }
     public end(): void {
         var elem = document.querySelector('#sabre-bleu');
@@ -43,26 +53,43 @@ export class BeatSaberPhase extends Phase {
 
     public hit(): void {
         this.hitCount++;
-        if (this.hitCount === this.cubes.length) {
+        if (this.hitCount === this.notes.length) {
             this.end();
         }
     }
 
     public addCubes(): void {
         var sceneEl = document.querySelector('a-scene');
-        this.cubes.forEach(cube => {
-            var xPos = cube.isRight ? this.rightInitPosition[0] : this.leftInitPosition[0];
-            var yPos = cube.isUp ? this.leftInitPosition[1] : this.leftInitPosition[1] - 0.5;
-            var zPos = this.leftInitPosition[2];
+        let timeRatio = 60 / this.track._beatsPerMinute;
+
+        this.notes = this.track._notes.filter(n => (n._time + 10) * timeRatio < (this.duration + this.songStartOffset - 5 ) && (n._time + 10) * timeRatio > (this.songStartOffset - 5 ));
+
+
+        this.notes.forEach(note => {
+            let color = note._type === 0 ? 'red' : 'blue';
+            var xPos = this.cubesPosition[0] - note._lineIndex * 0.2;
+            var yPos = this.cubesPosition[1] - note._lineLayer * 0.2;
+            var zPos = this.cubesPosition[2];
+            var delay = ((note._time + 10) * timeRatio - this.songStartOffset) * 1000;
+
             var cubeEl = document.createElement('a-box');
-            cubeEl.setAttribute('color', cube.color);
+            cubeEl.setAttribute('color', color);
             cubeEl.setAttribute('position', `${xPos} ${yPos} ${zPos}`);
             cubeEl.setAttribute('opacity', `0.8`);
-            cubeEl.setAttribute('bs-cube', 'color: ' + (cube.color === 'blue' ? 'bleu' : 'rouge') + ';');
+            cubeEl.setAttribute('bs-cube', 'color: ' + (color === 'blue' ? 'bleu' : 'rouge') + ';');
             cubeEl.setAttribute('geometry', `width: 0.2; height: 0.2; depth: 0.2;`);
-            cubeEl.setAttribute('animation', `property: position; to:${xPos} ${yPos} ${zPos - 5}; loop: false; dur: 10000; delay: ${cube.delay}`);
-            sceneEl.appendChild(cubeEl);
+            cubeEl.setAttribute('animation', `property: position; to:${xPos} ${yPos} ${zPos - 5}; loop: false; dur: 5000; delay: 0`);
+
+            setTimeout(() => {
+                sceneEl.appendChild(cubeEl);
+            }, delay);
         });
+    }
+
+    public addSound(): void {
+        if (!this.soundEl) {
+            this.soundEl = document.querySelector('#echaillon-sound');
+        }
     }
 
 }

@@ -43,6 +43,19 @@ npm run test
 
 Of course! Open an issue and let's discuss :smiley:.
 
+## Music
+
+# Music from https://filmmusic.io
+"Sneaky Adventure" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/
+
+"Sincerely" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/)
+
+# Others
+"Echaillon" by Mehdi Cholat
+https://www.youtube.com/watch?v=kHyxnNE7tdo
+
 ## Links and other useful stuff
 
 Similar projects that could be a point of inspiration:

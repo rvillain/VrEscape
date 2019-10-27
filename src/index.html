@@ -11,13 +11,17 @@
 
 <body>
     <a-scene shadow="type:pcfsoft" light="defaultLightsEnabled: false" stats physics>
-        <a-assets timeout="10000">
+        <a-assets>
             <img id="parquet" src="assets/parquet.jpg">
             <img id="volet" src="assets/volet.jpg">
             <img id="apollo" src="assets/apollo.png">
             <img id="papier-peint" src="assets/papier-peint.jpg">
             <img id="beat-saber" src="assets/beat-saber.jpg">
             <img id="moon" src="assets/moon.png">
+
+            <audio id="echaillon" src="assets/sound/echaillon.egg" preload="auto"></audio>
+            <audio id="startSound" src="assets/sound/sincerely.ogg" preload="auto"></audio>
+            <audio id="sneaky-adventure" src="assets/sound/sneaky-adventure.ogg" preload="auto"></audio>
 
             <a-asset-item id="vive-obj" src="assets/models/vive/vr_controller_vive.obj"></a-asset-item>
             <a-asset-item id="vive-mtl" src="assets/models/vive/vr_controller_vive.mtl"></a-asset-item>
@@ -579,6 +583,8 @@
                     </a-entity>
                 </a-entity>
                 <a-image id="bs-poster" src="#beat-saber" position="-6.5294 1.56413 -1.49249" material="" geometry="" rotation="0 -90 0" scale="1 0.5 1"></a-image>
+                
+                <a-sound src="#echaillon" id="echaillon-sound" autoplay="false" position="-6.5294 1.56413 -1.49249"></a-sound>
             </a-entity>
             
 
@@ -592,6 +598,11 @@
 
             </a-text>
         </a-box>
+
+        <a-entity id="sounds">
+            <a-sound src="#startSound" id="startSound" autoplay="true" position="0 0 0"></a-sound>
+            <a-sound src="#sneaky-adventure" id="startSound" autoplay="false" position="0 0 0"></a-sound>
+        </a-entity>
 
         <a-entity id="cameraRig" position="-8.5 0 -3" rotation="0 180 0">
             <a-camera id="head">
@@ -610,7 +621,10 @@
             </a-entity>
         </a-entity>
 
-        <a-entity scoreboard position="-7.91022 0.8 -1.28953" rotation="0 180 0"></a-entity>
+        <a-entity id="scoreboard" position="-7.91022 0.8 -1.28953" rotation="0 180 0">
+            <a-text id="timer" value="" position="0 0.2 0" text=""></a-text>
+            <a-text id="steps" scale="0.5 0.5 0.5" value="" position="0 -0.2 0" text=""></a-text>
+        </a-entity>
 
         <a-sky color="#cef9ff"></a-sky>
         <a-entity id="lights">

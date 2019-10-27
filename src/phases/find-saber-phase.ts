@@ -15,6 +15,7 @@ export class FindSaberPhase extends Phase {
     rightSaberFound = false;
 
     public start(): void {
+        this.sceneEl = document.querySelector('a-scene');
         this.addSabers();
     }
     public end(): void {
@@ -84,8 +85,7 @@ export class FindSaberPhase extends Phase {
             entity.setAttribute('position', position);
             entity.setAttribute('rotation', rotation);
 
-            var sceneEl = document.querySelector('a-scene');
-            sceneEl.appendChild(entity);
+            this.sceneEl.appendChild(entity);
         }
     }
 

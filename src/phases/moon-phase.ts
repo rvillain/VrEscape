@@ -10,13 +10,13 @@ export class MooonPhase extends Phase {
     }
 
     public start(): void {
-        var sceneEl = document.querySelector('a-scene');
+        this.sceneEl = document.querySelector('a-scene');
 
         let linkHtml = '<a-link href="moon.html" title="Aller sur la lune" scale="0.8 0.8 0.8" image="#moon" position="0 1.2 0"></a-link>';
         var entity = document.createElement('a-entity');
         entity.setAttribute('position', '-6 0 -10');
         entity.innerHTML = linkHtml;
-        sceneEl.appendChild(entity);
+        this.sceneEl.appendChild(entity);
     }
     public end(): void {
     }

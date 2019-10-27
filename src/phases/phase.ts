@@ -5,6 +5,8 @@ export abstract class Phase {
         this.game = game;
     }
 
+    public sceneEl: HTMLElement;
+
     public lightPosition: string;
 
     public scoreboardPosition: string;

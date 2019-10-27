@@ -13,13 +13,13 @@ export class BizPhase extends Phase {
     }
 
     public start(): void {
+        this.sceneEl = document.querySelector('a-scene');
         this.createBoard();
     }
     public end(): void {
     }
 
     public createBoard() {
-        var sceneEl = document.querySelector('a-scene');
         this.boardEl = document.createElement('a-entity');
         this.boardEl.setAttribute('id', 'biz-board');
         this.boardEl.setAttribute('position', '-4.41392 1.43847 -9.71405');
@@ -29,6 +29,6 @@ export class BizPhase extends Phase {
 
         this.boardEl.innerHTML = html;
 
-        sceneEl.appendChild(this.boardEl);
+        this.sceneEl.appendChild(this.boardEl);
     }
 }
