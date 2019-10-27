@@ -89,4 +89,8 @@ export class FindSaberPhase extends Phase {
         }
     }
 
+    public buttonClick(action: string): void {
+
+    }
+
 }

@@ -3,6 +3,7 @@ import { Phase } from './phases/phase';
 import { BizPhase } from './phases/biz-phase';
 import { FindSaberPhase } from './phases/find-saber-phase';
 import { Constants } from './constants';
+import { MooonPhase } from './phases/moon-phase';
 
 export class GameManager {
 
@@ -11,6 +12,7 @@ export class GameManager {
         this.phases.push(new FindSaberPhase(this));
         this.phases.push(new BeatSaberPhase(this));
         this.phases.push(new BizPhase(this));
+        this.phases.push(new MooonPhase(this));
         this.currentPhase = this.phases[0];
         this.currentTime = 600;
 
@@ -18,18 +20,19 @@ export class GameManager {
         let phaseStr = localStorage.getItem(Constants.phaseKey);
 
         if (startStr) {
-            let duration = new Date().getTime() - new Date(startStr).getTime() / 100;
-            this.currentTime = this.currentTime - duration;
-            if (this.currentTime < 0) {
+            let duration = Math.floor((Date.now() - parseInt(startStr)) / 1000);
+            let diff = this.currentTime - duration;
+            if (diff < 0) {
                 localStorage.removeItem(Constants.startKey);
                 localStorage.removeItem(Constants.phaseKey);
             }
             else {
+                this.currentTime = diff;
                 let phaseIndex = parseInt(phaseStr);
                 this.currentPhase = this.phases[phaseIndex];
             }
             setTimeout(() => {
-                this.start();
+                this.start(false);
             }, 550);
         }
 
@@ -46,11 +49,29 @@ export class GameManager {
     public timerEl: any;
     public currentTime: number;
 
-    public start(): void {
+    public start(gameNotStarted = true): void {
+        if (gameNotStarted) {
+            localStorage.setItem(Constants.startKey, Date.now().toString());
+            localStorage.setItem(Constants.phaseKey, '0');
+        }
+        else {
+            let btEl = document.querySelector('#start-button');
+            if (btEl) {
+                btEl.parentNode.removeChild(btEl);
+            }
+        }
         this.currentPhase.start();
         this.moveLight();
         this.timer = new Timer(this);
         this.updateScoreBoard();
+        this.startMusic();
+    }
+
+    public startMusic() {
+        (document.querySelector('#music') as any).components.sound.playSound();
+    }
+    public stopMusic() {
+        (document.querySelector('#music') as any).components.sound.stopSound();
     }
 
     public phaseEnd() {

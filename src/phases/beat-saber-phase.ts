@@ -28,6 +28,7 @@ export class BeatSaberPhase extends Phase {
         this.sceneEl = document.querySelector('a-scene');
         this.addCubes();
         this.addSound();
+        this.game.stopMusic();
         this.soundEl.components.sound.playSound();
         this.hitCount = 0;
         setTimeout(() => {
@@ -48,6 +49,7 @@ export class BeatSaberPhase extends Phase {
         elem = document.querySelector('#sabre-rouge');
         elem.parentNode.removeChild(elem);
 
+        this.removeSound();
         this.game.phaseEnd();
     }
 
@@ -90,6 +92,14 @@ export class BeatSaberPhase extends Phase {
         if (!this.soundEl) {
             this.soundEl = document.querySelector('#echaillon-sound');
         }
+    }
+
+    public removeSound(): void {
+        this.soundEl.parentNode.removeChild(this.soundEl);
+    }
+
+    public buttonClick(action: string): void {
+
     }
 
 }

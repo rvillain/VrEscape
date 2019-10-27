@@ -17,4 +17,6 @@ export abstract class Phase {
     public abstract start(): void;
 
     public abstract end(): void;
+
+    public abstract buttonClick(action: string): void;
 }
