@@ -7,6 +7,9 @@ export abstract class Phase {
 
     public lightPosition: string;
 
+    public scoreboardPosition: string;
+    public scoreboardRotation: string;
+
     public game: GameManager;
 
     public abstract start(): void;

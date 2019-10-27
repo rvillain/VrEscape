@@ -14,6 +14,7 @@ import './components/buff-color';
 import './components/bs-cube';
 import './components/bs-saber';
 import './components/start-button';
+import './components/scoreboard';
 
 declare global {
     interface Window { game: GameManager; $: any; }

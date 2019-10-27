@@ -2,6 +2,7 @@ import { BeatSaberPhase } from './phases/beat-saber-phase';
 import { Phase } from './phases/phase';
 import { BizPhase } from './phases/biz-phase';
 import { FindSaberPhase } from './phases/find-saber-phase';
+import { Constants } from './constants';
 
 export class GameManager {
 
@@ -13,10 +14,29 @@ export class GameManager {
         this.currentPhase = this.phases[0];
         this.currentTime = 600;
 
+        let startStr = localStorage.getItem(Constants.startKey);
+        let phaseStr = localStorage.getItem(Constants.phaseKey);
+
+        if (startStr) {
+            let duration = new Date().getTime() - new Date(startStr).getTime() / 100;
+            this.currentTime = this.currentTime - duration;
+            if (this.currentTime < 0) {
+                localStorage.removeItem(Constants.startKey);
+                localStorage.removeItem(Constants.phaseKey);
+            }
+            else {
+                let phaseIndex = parseInt(phaseStr);
+                this.currentPhase = this.phases[phaseIndex];
+            }
+            setTimeout(() => {
+                this.start();
+            }, 550);
+        }
+
         setTimeout(() => {
             this.timerEl = document.getElementById('timer');
             this.updateTimer();
-        }, 1000);
+        }, 500);
 
     }
     public phases: Phase[];
@@ -42,6 +62,7 @@ export class GameManager {
         else {
             this.currentPhase = this.phases[index];
             this.moveLight();
+            this.moveScoreboard();
             this.currentPhase.start();
         }
         this.updateScoreBoard();
@@ -54,6 +75,11 @@ export class GameManager {
     public moveLight() {
         let lightEl = document.getElementById('light');
         lightEl.setAttribute('animation', `property: position; to:${this.currentPhase.lightPosition}; loop: false; dur: 3000;`);
+    }
+    public moveScoreboard() {
+        let lightEl = document.getElementById('scoreboard');
+        lightEl.setAttribute('position', this.currentPhase.scoreboardPosition);
+        lightEl.setAttribute('rotation', this.currentPhase.scoreboardRotation);
     }
 
     public updateScoreBoard() {

@@ -7,6 +7,8 @@ export class FindSaberPhase extends Phase {
     constructor(game: GameManager) {
         super(game);
         this.lightPosition = '-8.65385 2 -3.32804';
+        this.scoreboardPosition = '-7.91022 0.8 -1.28953';
+        this.scoreboardRotation = '0 180.000 0';
     }
 
     leftSaberFound = false;
