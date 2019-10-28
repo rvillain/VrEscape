@@ -27,7 +27,7 @@ export class MooonPhase extends Phase {
         }
         else {
             // On est encore sur terre
-            let linkHtml = '<a-link href="moon.html" title="Aller sur la lune" scale="0.8 0.8 0.8" image="#moon" position="0 1.2 0"></a-link>';
+            let linkHtml = '<a-link href="moon.html" title="Aller sur la lune" scale="0.8 0.8 0.8" image="#moon" position="0.91108 1.2 0.57651" rotation="0 -90 0"></a-link>';
             var entity = document.createElement('a-entity');
             entity.setAttribute('position', '-6 0 -10');
             entity.setAttribute('roation', '0 -90 0');

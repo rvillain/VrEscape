@@ -26,6 +26,11 @@ declare var $: any;
 
       if (data.grab) {
         el.addEventListener('grab-start', (e) => {
+          console.log('grabstart');
+          this.grab(e);
+        });
+        el.addEventListener('hitstart', (e) => {
+          console.log('hitstart');
           this.grab(e);
         });
       }

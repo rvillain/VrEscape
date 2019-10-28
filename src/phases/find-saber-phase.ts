@@ -70,7 +70,7 @@ export class FindSaberPhase extends Phase {
                 target = document.querySelector('#lhand');
                 break;
         }
-        const htmlSaber = ` <a-entity id="sabre-${color}" ${inHand ? '' : 'grab'} bs-saber="color: ${color}" position="0 0 0" rotation="0 0 0">
+        const htmlSaber = ` <a-entity id="sabre-${color}" ${inHand ? '' : 'grabbable'} static-body bs-saber="color: ${color}" position="0 0 0" rotation="0 0 0">
                                 <a-cylinder color="#DEDEDE" geometry="radius: 0.015; height: 0.22"></a-cylinder>
                                 <a-cylinder position="0 0.44 0" opacity="0.5" color="${hexaColor}" geometry="radius: 0.015; height: 0.66"></a-cylinder>
                             </a-entity>`;
@@ -79,6 +79,8 @@ export class FindSaberPhase extends Phase {
         entity.innerHTML = htmlSaber;
         if (inHand) {
             target.appendChild(entity);
+            entity.setAttribute('rotation', '-90 0 0');
+            entity.setAttribute('position', '-0.006 -0.013 0.102');
         }
         else {
             entity.setAttribute('id', 'sabre-init');

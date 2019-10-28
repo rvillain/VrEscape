@@ -12,7 +12,10 @@ AFRAME.registerComponent('start-button', {
       el.parentNode.removeChild(el);
     });
     el.addEventListener('hitstart', (e: any) => {
-      console.log('hitstart', e);
+      window.game.start();
+      el.parentNode.removeChild(el);
+    });
+    el.addEventListener('grab-start', (e: any) => {
       window.game.start();
       el.parentNode.removeChild(el);
     });

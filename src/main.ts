@@ -7,7 +7,7 @@ import 'aframe-geometry-merger-component';
 import 'aframe-aabb-collider-component';
 import 'aframe-teleport-controls';
 import 'aframe-physics-system';
-// import 'aframe-physics-extras';
+import 'aframe-physics-extras';
 import 'super-hands';
 import { GameManager } from './game-manager';
 import './components/buff-color';
