@@ -17,6 +17,8 @@ declare var game: GameManager;
       var el = this.el;  // <a-box>
       el.setAttribute('aabb-collider', 'objects: #sabre-' + data.color);
 
+      el.classList.add('cube');
+
       el.addEventListener('animationcomplete', () => {
         // Suppression du cube à la fin de l'animation
         el.parentNode.removeChild(el);
@@ -25,6 +27,9 @@ declare var game: GameManager;
         this.cubeHit();
       });
       el.addEventListener('hitstart', (e: any) => {
+          this.cubeHit();
+      });
+      el.addEventListener('hitend', (e: any) => {
           this.cubeHit();
       });
     },

@@ -75,9 +75,10 @@ export class GameManager {
     }
 
     public phaseEnd() {
+        console.log('phase end');
         const index = this.phases.indexOf(this.currentPhase) + 1;
 
-        if (this.phases.length < index) {
+        if (this.phases.length == index) {
             // game end
         }
         else {
@@ -85,8 +86,8 @@ export class GameManager {
             this.moveLight();
             this.moveScoreboard();
             this.currentPhase.start();
+            this.updateScoreBoard();
         }
-        this.updateScoreBoard();
     }
 
     public end() {

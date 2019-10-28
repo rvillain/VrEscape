@@ -19,30 +19,32 @@ export class FindSaberPhase extends Phase {
         this.addSabers();
     }
     public end(): void {
+        console.log('find end');
         this.game.phaseEnd();
     }
 
 
     findSaber(color: string) {
-        var elem = document.querySelector('#sabre-' + color);
-        var parent = elem.parentNode;
-        switch (color) {
-            case 'bleu':
-                this.rightSaberFound = true;
-                break;
-            case 'rouge':
-                this.leftSaberFound = true;
-                break;
+        if (!this.leftSaberFound || !this.rightSaberFound) {
+            var elem = document.querySelector('#sabre-' + color);
+            var parent = elem.parentNode;
+            switch (color) {
+                case 'bleu':
+                    this.rightSaberFound = true;
+                    break;
+                case 'rouge':
+                    this.leftSaberFound = true;
+                    break;
+            }
+
+            parent.removeChild(elem);
+
+            this.addSaber(color, true);
+
+            if (this.leftSaberFound && this.rightSaberFound) {
+                this.end();
+            }
         }
-
-        parent.removeChild(elem);
-
-        this.addSaber(color, true);
-
-        if (this.leftSaberFound && this.rightSaberFound) {
-            this.end();
-        }
-
     }
 
     public addSabers(): void {

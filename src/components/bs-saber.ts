@@ -19,6 +19,7 @@ declare var $: any;
       var el = this.el;  // <a-box>
 
       el.classList.add('saber');
+      el.setAttribute('aabb-collider', 'objects: .cube');
 
       el.addEventListener('click', (e) => {
         this.grab(e);
@@ -31,7 +32,7 @@ declare var $: any;
         });
         el.addEventListener('hitstart', (e) => {
           console.log('hitstart');
-          this.grab(e);
+          // this.grab(e);
         });
       }
     },

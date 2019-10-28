@@ -38,11 +38,11 @@ export class BeatSaberPhase extends Phase {
                 setTimeout(() => {
                     this.start();
                 }, 2000);
-                this.start();
             }
         }, this.duration * 1000);
     }
     public end(): void {
+        console.log('beat-saber end');
         var elem = document.querySelector('#sabre-bleu');
         elem.parentNode.removeChild(elem);
 
